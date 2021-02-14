@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout tools:context=".ui.addquestion.AddQuestion"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- binding object of ViewModel to the XML layout -->
+    <data>
+        <variable
+            name="question"
+            type="com.example.quiz.model.Quiz" />
+        <variable
+            name="viewModel"
+            type="com.example.quiz.ui.addquestion.AddQuestionViewModel" />
+    </data>
+
+    <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/questionList">
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+              <TextView
+                android:id="@+id/Score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Score: 0"
+                android:textSize="20sp" />
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:20"
+                android:textSize="25sp"
+                android:layout_centerHorizontal="true"
+                android:textColor="@android:color/black"
+                android:padding="10dp"
+                android:id="@+id/timeCounter" />
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Question  1/X"
+                android:textSize="18sp"
+                android:id="@+id/questionCount" />
+          </LinearLayout>
+
+            <!--            Question-->
+
+            <TextView
+                android:id="@+id/Question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/timeCounter"
+                android:layout_marginTop="19dp"
+                android:gravity="center"
+                android:text="@{question.question}"
+                android:textSize="20sp" />
+
+<!--            options start from here-->
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_centerVertical="true"
+                android:padding="10dp">
+                <RadioButton
+                    android:id="@+id/radioButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{question.optionA}"
+                    />
+                <RadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{question.optionB}"
+                    />
+                <RadioButton
+                    android:id="@+id/radioButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{question.optionC}"
+                    />
+                <RadioButton
+                    android:id="@+id/radioButton4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{question.optionD}"
+                    />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:onClick="@{(view) -> viewModel.nextQuestion()}"
+            />
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>
