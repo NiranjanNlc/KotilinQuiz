@@ -1,5 +1,6 @@
 package com.example.quiz.ui.addquestion
 
+import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
@@ -8,37 +9,106 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.quiz.R
+import com.example.quiz.databinding.FragmentCountDownBinding
+import com.mikhaellopez.circularprogressbar.CircularProgressBar
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CountDownFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class CountDownFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+   private lateinit var binding: FragmentCountDownBinding;
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        binding= FragmentCountDownBinding.inflate(layoutInflater)
+        binding.circularProgressBar.onProgressChangeListener = { progress ->
+            // Do something
+            binding.circularProgressBar.apply {
+            //    setProgressWithAnimation(progress, 500)
+            }
+            Toast.makeText(activity,"Finished "+progress.toString(),Toast.LENGTH_SHORT).show()
+        }
+
+        binding.circularProgressBar.onIndeterminateModeChangeListener = { isEnable ->
+            // Do something
+        }
         return inflater.inflate(R.layout.fragment_count_down, container, false)
     }
+
+    /**
+     * Called when the Fragment is visible to the user.  This is generally
+     * tied to [Activity.onStart] of the containing
+     * Activity's lifecycle.
+     */
+    override fun onStart()
+    {
+        super.onStart()
+        binding.circularProgressBar.apply {
+
+                // Set Progress
+                // progress = 65f
+                // or with animation
+                //setProgressWithAnimation(65f, 1000) // =1s
+
+                // Set Progress Max
+             //   progressMax = 100f
+
+                // Set ProgressBar Color
+                progressBarColor = Color.BLACK
+                // or with gradient
+                progressBarColorStart = Color.GRAY
+                progressBarColorEnd = Color.RED
+                progressBarColorDirection = CircularProgressBar.GradientDirection.TOP_TO_BOTTOM
+
+                // Set background ProgressBar Color
+                backgroundProgressBarColor = Color.GRAY
+                // or with gradient
+                backgroundProgressBarColorStart = Color.WHITE
+                backgroundProgressBarColorEnd = Color.RED
+                backgroundProgressBarColorDirection =
+                    CircularProgressBar.GradientDirection.TOP_TO_BOTTOM
+
+                // Set Width
+                progressBarWidth = 7f // in DP
+                backgroundProgressBarWidth = 3f // in DP
+
+                // Other
+                roundBorder = true
+                startAngle = 180f
+                progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
+            }
+        }
+
+    /**
+     * Called when the fragment is visible to the user and actively running.
+     * This is generally
+     * tied to [Activity.onResume] of the containing
+     * Activity's lifecycle.
+     */
+    override fun onResume() {
+        super.onResume()
+        val timer = object: CountDownTimer(20000, 1000) {
+            override fun onTick(millisUntilFinished: Long)
+            {
+                binding.circularProgressBar.apply {
+                    progress= (millisUntilFinished/1000).toFloat()
+                }
+
+            }
+
+            override fun onFinish()
+            {
+                Toast.makeText(activity,"Finished ",Toast.LENGTH_SHORT)
+            }
+        }
+        timer.start()
+    }
+
     private fun startTimer() {
        val countDownTimer = object : CountDownTimer(0, 1000) {
             //            end of timer
@@ -53,23 +123,5 @@ class CountDownFragment : Fragment() {
 
         }.start()
         }
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CountDownFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CountDownFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }
