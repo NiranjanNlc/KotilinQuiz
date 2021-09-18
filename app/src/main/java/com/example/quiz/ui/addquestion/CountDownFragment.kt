@@ -26,17 +26,6 @@ class CountDownFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding= FragmentCountDownBinding.inflate(layoutInflater)
-        binding.circularProgressBar.onProgressChangeListener = { progress ->
-            // Do something
-            binding.circularProgressBar.apply {
-            //    setProgressWithAnimation(progress, 500)
-            }
-            Toast.makeText(activity,"Finished "+progress.toString(),Toast.LENGTH_SHORT).show()
-        }
-
-        binding.circularProgressBar.onIndeterminateModeChangeListener = { isEnable ->
-            // Do something
-        }
         return inflater.inflate(R.layout.fragment_count_down, container, false)
     }
 
@@ -48,41 +37,8 @@ class CountDownFragment : Fragment() {
     override fun onStart()
     {
         super.onStart()
-        binding.circularProgressBar.apply {
 
-                // Set Progress
-                // progress = 65f
-                // or with animation
-                //setProgressWithAnimation(65f, 1000) // =1s
-
-                // Set Progress Max
-             //   progressMax = 100f
-
-                // Set ProgressBar Color
-                progressBarColor = Color.BLACK
-                // or with gradient
-                progressBarColorStart = Color.GRAY
-                progressBarColorEnd = Color.RED
-                progressBarColorDirection = CircularProgressBar.GradientDirection.TOP_TO_BOTTOM
-
-                // Set background ProgressBar Color
-                backgroundProgressBarColor = Color.GRAY
-                // or with gradient
-                backgroundProgressBarColorStart = Color.WHITE
-                backgroundProgressBarColorEnd = Color.RED
-                backgroundProgressBarColorDirection =
-                    CircularProgressBar.GradientDirection.TOP_TO_BOTTOM
-
-                // Set Width
-                progressBarWidth = 7f // in DP
-                backgroundProgressBarWidth = 3f // in DP
-
-                // Other
-                roundBorder = true
-                startAngle = 180f
-                progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
-            }
-        }
+    }
 
     /**
      * Called when the fragment is visible to the user and actively running.
@@ -92,21 +48,7 @@ class CountDownFragment : Fragment() {
      */
     override fun onResume() {
         super.onResume()
-        val timer = object: CountDownTimer(20000, 1000) {
-            override fun onTick(millisUntilFinished: Long)
-            {
-                binding.circularProgressBar.apply {
-                    progress= (millisUntilFinished/1000).toFloat()
-                }
-
-            }
-
-            override fun onFinish()
-            {
-                Toast.makeText(activity,"Finished ",Toast.LENGTH_SHORT)
-            }
-        }
-        timer.start()
+        startTimer()
     }
 
     private fun startTimer() {
@@ -122,6 +64,7 @@ class CountDownFragment : Fragment() {
             }
 
         }.start()
+
         }
 
 }
