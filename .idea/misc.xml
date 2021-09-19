@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/question_pattern.xml" value="0.1" />
         <entry key="app/src/main/res/layout/scorer_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/user_form.xml" value="0.1" />
         <entry key="app/src/main/res/layout/welcome.xml" value="0.1" />
       </map>
     </option>

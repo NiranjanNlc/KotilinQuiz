@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.quiz"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -71,6 +71,9 @@ dependencies {
 
     //siruclar [rogressbar
     // implementation 'com.mikhaellopez:circularprogressbar:3.1.0' not used
+
+    //gif image resolution
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
 
 
     testImplementation 'junit:junit:4.12'

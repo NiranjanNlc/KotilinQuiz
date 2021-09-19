@@ -7,9 +7,8 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.quiz.ui.addquestion.CountDownFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_count_down" />
+        android:name="com.example.quiz.ui.addquestion.Congrats"
+        android:label="@string/menu_home" />
     <fragment
         android:id="@+id/countDownFragment"
         android:name="com.example.quiz.ui.addquestion.CountDownFragment"
