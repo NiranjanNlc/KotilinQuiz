@@ -13,8 +13,11 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.quiz.R
-import com.example.quiz.databinding.FragmentCountDownBinding 
+import com.example.quiz.databinding.FragmentCountDownBinding
+import java.lang.Override as Override1
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,14 +27,16 @@ private const val ARG_PARAM2 = "param2"
 
 class CountDownFragment : Fragment() {
 
-   private lateinit var binding: FragmentCountDownBinding;
+   private lateinit var binding :FragmentCountDownBinding
     private lateinit var mProgress:ProgressBar
     private lateinit var tv:TextView
+    private lateinit var countDownViewModal: CountDownViewModal;
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentCountDownBinding.inflate(layoutInflater)
+        binding= DataBindingUtil.setContentView(requireActivity(),R.layout.fragment_count_down)
+        countDownViewModal=ViewModelProvider(this).get( CountDownViewModal::class.java)
         mProgress = binding.circularProgressbar
         tv=binding.tv
         val  res = getResources();
@@ -48,35 +53,32 @@ class CountDownFragment : Fragment() {
 //               setInterpolator(DecelerateInterpolator());
 //               start();
 //            }
+        startTimer()
+        countDownViewModal.progress.observe(requireActivity(),
+        {
+            Log.d(" viewmodal updated ", it.toString())
+            mProgress.progress= it
+            tv.text = it.toString()+"%"
+        })
 
             return inflater.inflate(R.layout.fragment_count_down, container, false)
         }
+       fun startTimer()
+       {
+           val countDownTimer = object : CountDownTimer(20000, 1000) {
+               //            end of timer
+               override fun onFinish()
+               {
 
-    /**
-     * Called when the Fragment is visible to the user.  This is generally
-     * tied to [Activity.onStart] of the containing
-     * Activity's lifecycle.
-     */
-    override fun onStart() {
-        super.onStart()
-        requireActivity().runOnUiThread {
-            val countDownTimer = object : CountDownTimer(20000, 1000) {
-                //            end of timer
-                override fun onFinish()
-                {
+               }
 
-                }
+               override fun onTick(millisUntilFinished: Long)
+               {
+                   Log.d(" tickeld ",millisUntilFinished.toString())
+                   countDownViewModal.changeProgress()
+               }
 
-                override fun onTick(millisUntilFinished: Long)
-                {
-                    Log.d(" tickeld ",millisUntilFinished.toString())
-                    mProgress.max=100
-                    mProgress.progress= ((millisUntilFinished/1000).toInt());
-                    tv.text = millisUntilFinished.toString() + "%";
-                }
-
-            }
-            countDownTimer.start()
-        }
-    }
+           }
+           countDownTimer.start()
+       }
 }
