@@ -11,10 +11,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.quiz.MainActivity
-
 import com.example.quiz.R
-import com.example.quiz.databinding.AddQuestionFragmentBinding
 import com.example.quiz.factoryRepo.ModelViewFactory
 import com.example.quiz.factoryRepo.Repo
 import kotlinx.android.synthetic.main.add_question_fragment.*
@@ -25,7 +22,7 @@ class AddQuestion : Fragment() {
     companion object {
         fun newInstance() = AddQuestion()
     }
-    private lateinit var  addQuestionFragmentBinding : AddQuestionFragmentBinding;
+    private lateinit var  addQuestionFragmentBinding : com.example.quiz.databinding.QuestionPatternBinding;
     private lateinit var viewModel: AddQuestionViewModel
     private var count =0;
     private var score=0;
@@ -35,16 +32,16 @@ class AddQuestion : Fragment() {
     ): View? {
         val repo = Repo()
         val factory = ModelViewFactory(repo)
-        addQuestionFragmentBinding= DataBindingUtil.setContentView(this.requireActivity(),R.layout.add_question_fragment )
-        viewModel = ViewModelProvider(this,factory).get(AddQuestionViewModel::class.java)
+        addQuestionFragmentBinding = DataBindingUtil.setContentView(this.requireActivity(), R.layout.question_pattern)
+        viewModel = ViewModelProvider(this, factory).get(AddQuestionViewModel::class.java)
         context?.let { viewModel.getQuizQuestion(it) }
         viewModel.question.observe(viewLifecycleOwner, Observer
         {
-            println("this data here"+ it)
-             addQuestionFragmentBinding.question =it
+            println("this data here" + it)
+            addQuestionFragmentBinding.question = it
 
         })
-       return inflater.inflate(R.layout.add_question_fragment, container, false)
+        return inflater.inflate(R.layout.question_pattern,container,false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
