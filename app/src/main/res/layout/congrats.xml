@@ -1,53 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkPink"
     tools:context=".MainActivity">
 
-    <pl.droidsonroids.gif.GifImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/congratulations" />
+
+    <Button
+        android:id="@+id/btn_continue"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/solid_rounded"
+        android:backgroundTint="@color/lightGray2"
+        android:text="Continue"
+        android:textAllCaps="false"
+        android:textColor="@color/black2"
+        app:layout_constraintBottom_toTopOf="@+id/guideline52"
+        app:layout_constraintEnd_toStartOf="@+id/guideline43"
+        app:layout_constraintStart_toStartOf="@+id/guideline42" />
+
+    <ImageView
+        android:id="@+id/iv_matchIcon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_trophy"
+        app:layout_constraintBottom_toTopOf="@+id/guideline57"
+        app:layout_constraintEnd_toStartOf="@+id/guideline59"
+        app:layout_constraintStart_toStartOf="@+id/guideline58"
+        app:layout_constraintTop_toTopOf="@+id/guideline56" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tv_matchStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:fontFamily="cursive"
-        android:text="CONGRATULATIONS!"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/lato"
+        android:text="Congratulations"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline55"
+        app:layout_constraintEnd_toStartOf="@+id/guideline43"
+        app:layout_constraintStart_toStartOf="@+id/guideline42"
+        app:layout_constraintTop_toBottomOf="@+id/iv_matchIcon" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_subText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="138dp"
-        android:fontFamily="cursive"
-        android:padding="12dp"
-        android:text="TElS"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="60sp"
-        android:textStyle="bold" />
+        android:fontFamily="@font/lato"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline54"
+        app:layout_constraintEnd_toStartOf="@+id/guideline43"
+        app:layout_constraintStart_toStartOf="@+id/guideline42"
+        tools:text="Quiz Topic: GAMES" />
 
-    <TextView
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:fontFamily="cursive"
-        android:padding="8dp"
-        android:text="Love, Cindy"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="40sp"
-        android:textStyle="bold" />
-</RelativeLayout>
+        android:backgroundTint="@null"
+        android:checkable="false"
+        android:text="0 correct"
+        app:chipIcon="@drawable/ic_correct"
+        app:chipIconSize="16dp"
+        app:chipSurfaceColor="#FFCAD8"
+        app:iconStartPadding="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline53"
+        app:layout_constraintEnd_toStartOf="@+id/chip_opponent"
+        app:layout_constraintStart_toStartOf="@+id/guideline42" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_opponent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8 incorrect"
+        app:chipIcon="@drawable/ic_incorrect"
+        app:chipIconSize="12dp"
+        app:chipSurfaceColor="#FFCAD8"
+        app:iconStartPadding="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline53"
+        app:layout_constraintEnd_toStartOf="@+id/guideline43"
+        app:layout_constraintStart_toEndOf="@+id/chip_user" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05109489" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline43"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline52"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline53"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.67" />
+
+    <Button
+        android:id="@+id/btn_playAgain"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@null"
+        android:text="Play Again"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/black2"
+        app:layout_constraintBottom_toTopOf="@+id/btn_continue"
+        app:layout_constraintEnd_toStartOf="@+id/guideline43"
+        app:layout_constraintStart_toStartOf="@+id/guideline42"
+        app:strokeColor="@color/white" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline54"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.56" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline55"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline56"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.14637482" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline57"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3529412" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline58"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3187348" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline59"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.68613136" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
